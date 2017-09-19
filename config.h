@@ -4,9 +4,9 @@
 typedef struct applicationConfguration{
     char serverName[200];
     int serverPort;
-    size_t intervalSecs;
-    char gpsDevice[100];
-    char gpsNmeaProtocol[100];
+    size_t sendIntervalSecs;
+    char gpsDeviceName[100];
+    char gpsDeviceNmeaProtocol[100];
     char adminEmail[50];
 }appConfig;
 
