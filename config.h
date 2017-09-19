@@ -10,6 +10,6 @@ typedef struct applicationConfguration{
     char adminEmail[50];
 }appConfig;
 
-void getConfig(appConfig *config);
+int getConfig(appConfig *config);
 
 #endif

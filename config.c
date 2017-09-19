@@ -6,7 +6,7 @@
 #define MAXLEN 50 
 
 //A quick write for a simple configuration file
-void getConfig(appConfig *config){
+int getConfig(appConfig *config){
     size_t lineNr = 0;
     FILE *fp;
     fp = fopen(CONFIGFILE, "r");
@@ -24,7 +24,7 @@ void getConfig(appConfig *config){
             if(keyLen > MAXLEN || valLen > MAXLEN){
                //please integrate logger function here
                printf("Configuration option larger than allowed max of %d on line number %d\n", MAXLEN, lineNr);
-               exit(EXIT_FAILURE);
+               return 0;
             }
             
             if(bcmp(&sKey[0], &"serverName", 10) == 0){
@@ -49,6 +49,7 @@ void getConfig(appConfig *config){
     }else{
         //Pocess error
         printf("No such file; '%s'\n", CONFIGFILE);
-        exit(EXIT_FAILURE);
+        return 0;
     }
+    return 1;
 }

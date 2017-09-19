@@ -4,8 +4,14 @@
 int main(void){
     
     appConfig config;
-    getConfig(&config);
+    if(!getConfig(&config))
+        printf("Error in config, not loading changes.\n"); //log to logger, but contine
 
-    printf("testing getconfig, servername: %s\n", config.serverName);
+    printf("\ntesting getconfig\nservername: %s\n", config.serverName);
+    printf("serverport: %i\n", config.serverPort);
+    printf("sendIntervalSecs: %d\n", config.sendIntervalSecs);
+    printf("gpsDeviceName: %s\n", config.gpsDeviceName);
+    printf("gpsDeviceNmeaProtocol: %s\n", config.gpsDeviceNmeaProtocol);
+    printf("adminEmail: %s\n", config.adminEmail);
     return 0;
 }
