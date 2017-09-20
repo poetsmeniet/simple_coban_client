@@ -6,7 +6,7 @@
 #define MAXLEN 50 
 
 //A quick write for a simple configuration file
-int getConfig(appConfig *config){
+extern int getConfig(appConfig *config){
     size_t lineNr = 0;
     FILE *fp;
     fp = fopen(CONFIGFILE, "r");
