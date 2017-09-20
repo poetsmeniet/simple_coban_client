@@ -31,7 +31,7 @@ FILE *openGPSDevice(char *gpsDeviceName);
 
 //code adapted from Salvador Dali, stackoverflow. Many thanks!
 //Applies haversine method between decimal degrees lat/lon
-double calcDistance(double lat1, double lon1, double lat2, double lon2) {
+extern double calcDistance(double lat1, double lon1, double lat2, double lon2) {
     unsigned int R = 3440; // Radius of the earth in nm
     double pi = 3.141592653589793; 
     double dLat = (lat2 - lat1) * pi / 180;  
@@ -115,7 +115,7 @@ float degDecMin2DecDeg(char* degDecMin, char hem, size_t len){
 }
 
 //Extracts lat/lon from nmea 0183 sentence (gps dongle)
-void returnGPSPos(gpsPos *myPos, char *gpsDeviceName){
+extern void returnGPSPos(gpsPos *myPos, char *gpsDeviceName){
     char *line = malloc(sizeof(char) * 120);
     size_t len = 0;
 
@@ -163,7 +163,7 @@ void returnGPSPos(gpsPos *myPos, char *gpsDeviceName){
     free(line);
 }
 
-FILE *openGPSDevice(char *gpsDeviceName){
+extern FILE *openGPSDevice(char *gpsDeviceName){
     FILE *fp = fopen(gpsDeviceName, "r");
     if(fp == NULL){
         printf("Unable to open device");
