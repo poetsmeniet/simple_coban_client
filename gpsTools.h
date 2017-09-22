@@ -26,10 +26,12 @@ freely, subject to the following restrictions:
 typedef struct gpsPositionDD{
     double lat;
     double lon;
+    char latHemisphere;
+    char lonHemisphere;
 }gpsPos;
 
 double calcDistance(double lat1, double lon1, double lat2, double lon2);
-void returnGPSPos(gpsPos *myPos, char *gpsDeviceName);
+void returnGPSPos(gpsPos *myPos, char *gpsDeviceName, unsigned int gpsFormat);
 FILE *openGPSDevice(char *gpsDeviceName);
 #endif
 
