@@ -1,24 +1,25 @@
 #include <stdio.h>
 #include "config.h"
 #include "gpsTools.h"
+#include "coban.h"
 
 int main(void){
     
+    //Define configuration struct 
     appConfig config;
-    if(!getConfig(&config))
-        printf("Error in config, not loading changes.\n"); //log to logger, but contine
 
-    //printf("\ntesting getconfig\nservername: %s\n", config.serverName);
-    //printf("serverport: %i\n", config.serverPort);
-    //printf("sendIntervalSecs: %d\n", config.sendIntervalSecs);
-    //printf("gpsDeviceName: %s\n", config.gpsDeviceName);
-    //printf("gpsDeviceNmeaProtocol: %s\n", config.gpsDeviceNmeaProtocol);
-    //printf("adminEmail: %s\n", config.adminEmail);
+    //Populate configuration
+    if(!getConfig(&config)) //log to logger, but contine
+        printf("Error in config, not loading changes.\n"); 
 
+    //Define position data structure
     gpsPos myPos;
     
-    returnGPSPos(&myPos, config.gpsDeviceName);
-    printf("lat: %f\n", myPos.lat);
-    printf("lon: %f\n", myPos.lon);
+    //Glean GPS position data
+    unsigned int gpsFormat = 2; //decDeg
+    returnGPSPos(&myPos, config.gpsDeviceName, gpsFormat);
+
+    //Send in data using COBAN to tracker
+    deliverPositionReport(&myPos, &config);
     return 0;
 }
