@@ -1,3 +1,4 @@
+
 /*
 gps tools
 
@@ -115,7 +116,8 @@ float degDecMin2DecDeg(char* degDecMin, char hem, size_t len){
 }
 
 //Extracts lat/lon from nmea 0183 sentence (gps dongle)
-extern void returnGPSPos(gpsPos *myPos, char *gpsDeviceName){
+//gpsFOrmat: either 1: decdeg or 2: degDecMin
+extern void returnGPSPos(gpsPos *myPos, char *gpsDeviceName, unsigned int gpsFormat){
     char *line = malloc(sizeof(char) * 120);
     size_t len = 0;
 
@@ -142,15 +144,23 @@ extern void returnGPSPos(gpsPos *myPos, char *gpsDeviceName){
                 memcpy(lat, token, 9);
                 lat[9] = '\0';
             }
-            if(tokNr == 4 && verif == 1)
-                myPos->lat = degDecMin2DecDeg(lat, token[0], 9);
-            
+            if(tokNr == 4 && verif == 1){
+                myPos->latHemisphere = token[0];
+                if(gpsFormat == 1)
+                    myPos->lat = degDecMin2DecDeg(lat, token[0], 9);
+                else
+                    myPos->lat = atof(lat);
+            }
             if(tokNr == 5 && verif == 1){
                 memcpy(lon, token, 10);
                 lon[10] = '\0';
             }
             if(tokNr == 6 && verif == 1){
-                myPos->lon = degDecMin2DecDeg(lon, token[0], 10);
+                myPos->lonHemisphere = token[0];
+                if(gpsFormat == 1)
+                    myPos->lon = degDecMin2DecDeg(lon, token[0], 10);
+                else
+                    myPos->lon = atof(lon);
                 break;
             }
             tokNr++;
