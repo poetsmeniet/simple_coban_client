@@ -42,6 +42,9 @@ extern int getConfig(appConfig *config){
             if(bcmp(&sKey[0], &"gpsDeviceNmeaProtocol", 21) == 0){
                memcpy(config->gpsDeviceNmeaProtocol, &sVal, valLen);
             }
+            if(bcmp(&sKey[0], &"imei", 4) == 0){
+               config->imei = (long long int)strtoll(sVal, (char **)NULL, 10);
+            }
             if(bcmp(&sKey[0], &"adminEmail", 10) == 0){
                memcpy(config->adminEmail, &sVal, valLen);
             }

@@ -7,6 +7,7 @@ typedef struct applicationConfguration{
     size_t sendIntervalSecs;
     char gpsDeviceName[100];
     char gpsDeviceNmeaProtocol[100];
+    long long int imei;
     char adminEmail[50];
 }appConfig;
 
