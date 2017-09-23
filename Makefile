@@ -1,6 +1,6 @@
 NAME = simple_coban_client
 
-CODE_FILES = main.c config.c gpsTools.c coban.c
+CODE_FILES = main.c config.c gpsTools.c coban.c logger.c
 
 DOC_FILES = docs
 DEBUG = YES
