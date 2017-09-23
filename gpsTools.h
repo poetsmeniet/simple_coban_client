@@ -31,6 +31,7 @@ typedef struct gpsPositionDD{
 }gpsPos;
 
 double calcDistance(double lat1, double lon1, double lat2, double lon2);
+int nmeaChecksumVerified(char *sentence);
 void returnGPSPos(gpsPos *myPos, char *gpsDeviceName, unsigned int gpsFormat);
 FILE *openGPSDevice(char *gpsDeviceName);
 #endif

@@ -1,4 +1,3 @@
-
 /*
 gps tools
 
@@ -46,7 +45,7 @@ extern double calcDistance(double lat1, double lon1, double lat2, double lon2) {
 }
 
 //Returns substring using given index
-int assignSubstring(char *myStr, size_t start, size_t end, char *subStr){
+static int assignSubstring(char *myStr, size_t start, size_t end, char *subStr){
     if(end > start){
         char *s = &myStr[start];
         char *e = &myStr[end + 1];
@@ -59,7 +58,7 @@ int assignSubstring(char *myStr, size_t start, size_t end, char *subStr){
     }
 }
 
-unsigned int nmeaChecksumVerified(char *sentence){
+extern int nmeaChecksumVerified(char *sentence){
     if(strlen(sentence) > 15){ //Test sentence length
         int checkSum = 0;
         size_t i;
