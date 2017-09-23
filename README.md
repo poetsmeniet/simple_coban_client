@@ -12,3 +12,4 @@ Todo, among other things:
 - Verify configuration parameters
 - Mod receiver: S/W N/S additions
 - add comments to header files
+- Mail notifications
