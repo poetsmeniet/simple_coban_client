@@ -4,6 +4,7 @@
 #include <string.h>
 #include "config.h"
 #include "gpsTools.h"
+#include "logger.h"
 #include <arpa/inet.h>
 
 static void createCobanString(char *buffer, gpsPos *myPos, appConfig *config){
@@ -54,6 +55,7 @@ extern int deliverPositionReport(gpsPos *myPos, appConfig *config){
     addr_size = sizeof serverAddr;
    
     if(connect(clientSocket, (struct sockaddr *) &serverAddr, addr_size)){
+      logr(2, "Unable to connect to tracker (deliverPositionReport)");
       return 1;
     }
   

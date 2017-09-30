@@ -24,6 +24,7 @@ freely, subject to the following restrictions:
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include "logger.h"
 #include "gpsTools.h"
 //Dont forget to link with -lm
 
@@ -53,7 +54,7 @@ static int assignSubstring(char *myStr, size_t start, size_t end, char *subStr){
         subStr[end - start + 1] = '\0';
         return 0;
     }else{
-        printf("retSubstring error: end is greater than start.\n");
+        logr(1, "retSubstring error: end is greater than start.");
         return 1;
     }
 }
@@ -82,7 +83,6 @@ extern int nmeaChecksumVerified(char *sentence){
                 rc = 1;
 
         free(subStr);
-        //printf("Sentence was: %s", sentence);
 
         return rc;
     }else{
@@ -175,7 +175,7 @@ extern void returnGPSPos(gpsPos *myPos, char *gpsDeviceName, unsigned int gpsFor
 extern FILE *openGPSDevice(char *gpsDeviceName){
     FILE *fp = fopen(gpsDeviceName, "r");
     if(fp == NULL){
-        printf("Unable to open device");
+        logr(3, "Unable to open GPS device.");
         exit(1);
     }
     return fp;

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "config.h"
+#include "logger.h"
 #define CONFIGFILE "config.txt"
 #define MAXLEN 50 
 
@@ -23,7 +24,7 @@ extern int getConfig(appConfig *config){
             size_t valLen = strlen(sVal) + 1;
             if(keyLen > MAXLEN || valLen > MAXLEN){
                //please integrate logger function here
-               printf("Configuration option larger than allowed max of %d on line number %d\n", MAXLEN, lineNr);
+               logr(2, "Configuration option larger than allowed max of %d on line number %d", MAXLEN, lineNr);
                return 0;
             }
             
@@ -51,7 +52,7 @@ extern int getConfig(appConfig *config){
         }
     }else{
         //Pocess error
-        printf("No such file; '%s'\n", CONFIGFILE);
+        logr(3, "Cannot parse config. No such file; '%s'", CONFIGFILE);
         return 0;
     }
     return 1;
