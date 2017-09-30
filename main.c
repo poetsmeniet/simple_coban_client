@@ -4,7 +4,7 @@
 #include "gpsTools.h"
 #include "coban.h"
 #include "logger.h"
-#define LOGFILE "simple_coban.log"
+#define LOGFILE "/home/pi/Scripts/simple_coban_client/simple_coban.log"
 
 int main(void){
     //Initialize logger
@@ -14,14 +14,14 @@ int main(void){
     //Define configuration struct 
     appConfig config;
 
-    //Populate configuration
-    if(!getConfig(&config)) //log to logger, but contine
-        printf("Error in config, not loading changes.\n"); 
-
     //Define position data structure
     gpsPos myPos;
 
     while(1){
+        //Populate configuration
+        if(!getConfig(&config)) //log to logger, but contine
+            logr(2, "Error in config, not loading changes"); 
+
         //Glean GPS position data
         unsigned int gpsFormat = 2; //decDeg
         returnGPSPos(&myPos, config.gpsDeviceName, gpsFormat);
